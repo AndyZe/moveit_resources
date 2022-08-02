@@ -61,6 +61,13 @@ planner_configs:
     max_nearest_neighbors: 10  # use k nearest neighbors. default: 10
   PRMstarkConfigDefault:
     type: geometric::PRMstar
+  PersistentPRMstar:
+    type: geometric::PRMstar
+    termination_condition: CostConvergence[10,.1]
+    multi_query_planning_enabled: 1
+    store_planner_data: 1
+    load_planner_data: 0
+    planner_data_path: /tmp/roadmap.graph
   FMTkConfigDefault:
     type: geometric::FMT
     num_samples: 1000  # number of states that the planner should sample. default: 1000
@@ -133,6 +140,10 @@ planner_configs:
     type: geometric::TrajOpt
 
 panda_arm:
+  enforce_constrained_state_space: true
+  longest_valid_segment_fraction: 0.0001
+  projection_evaluator: joints(panda_joint1,panda_joint2)
+  default_planner_config: PersistentPRMstar
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
