@@ -133,8 +133,13 @@ planner_configs:
     type: geometric::TrajOpt
 
 panda_arm:
+  longest_valid_segment_fraction: 0.002
+  projection_evaluator: joints(panda_joint1, panda_joint2)
+  default_planner_config: PRMstarkConfigDefault
   planner_configs:
     - PRMstarkConfigDefault
+    - PRMkConfigDefault
+    - RRTConnectkConfigDefault
 panda_arm_hand:
   planner_configs:
     - PRMstarkConfigDefault
